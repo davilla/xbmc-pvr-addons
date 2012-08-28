@@ -29,6 +29,7 @@ ARCHITECTURE="unknown"
 HOST_INCLUDES=""
 HOST_CXXFLAGS=""
 ARCH_DEFINES="-DTARGET_POSIX -DTARGET_LINUX -D_LINUX"
+DYN_LIB_EXT="so"
 
 case "${host}" in
   arm*-*-linux*)
@@ -57,9 +58,10 @@ case "${host}" in
     ;;
   *-apple-darwin*)
     OS="darwin"
-    HOST_CXXFLAGS="-bundle -undefined dynamic_lookup"
+    HOST_CXXFLAGS="-dynamiclib -single_module -undefined dynamic_lookup"
     host_os_osx="yes"
     ARCH_DEFINES="-DTARGET_POSIX -DTARGET_DARWIN -D_LINUX"
+    DYN_LIB_EXT="dylib"
     ;;
   *-freebsd*)
     OS="freebsd"
@@ -78,6 +80,7 @@ AC_SUBST(HOST_CXXFLAGS)
 AC_SUBST(HOST_INCLUDES)
 AC_SUBST(OS)
 AC_SUBST(ARCH_DEFINES)
+AC_SUBST(DYN_LIB_EXT)
 
 if test "x$host_os_osx" = "xyes"; then
   AM_CONDITIONAL(HOST_IS_OSX, true)
