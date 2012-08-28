@@ -13,11 +13,11 @@ clean:
 	-rm -r -f $(LIB) $(ADDONBINNAME).pvr @abs_top_srcdir@/addons/$(ADDONNAME).@OS@-@ARCHITECTURE@.zip @abs_top_srcdir@/addons/.build/$(ADDONNAME) *.so *.lo *.o *.la *.a *.P *~
 
 release: $(lib_LTLIBRARIES)
-	cp -f .libs/$(LIBNAME).$(@DYN_LIB_EXT@) $(ADDONBINNAME).pvr
+	cp -f .libs/$(LIBNAME).@DYN_LIB_EXT@ $(ADDONBINNAME).pvr
 	$(STRIP) -x $(ADDONBINNAME).pvr
 
 debug: $(lib_LTLIBRARIES)
-	cp -f .libs/$(LIBNAME).$(@DYN_LIB_EXT@) $(ADDONBINNAME).pvr
+	cp -f .libs/$(LIBNAME).@DYN_LIB_EXT@ $(ADDONBINNAME).pvr
 
 $(LIB): @BUILD_TYPE@
 	cp -f $(ADDONBINNAME).pvr $(LIB)
